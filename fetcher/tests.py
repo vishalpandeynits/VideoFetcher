@@ -6,8 +6,9 @@ YOUTUBE_SEARCH_URL = 'https://www.googleapis.com/youtube/v3/search'
 
 class FetcherTest(TestCase):
     def test_api_keys(self):
-        """Tests if any of youtube api provided in environment variable is up and running. """
-        assert len(KEYS), "APIS KEYS NOT FOUND, add it in your environment variables."
+        """Tests if any of youtube api key provided is up and running. """
+
+        assert len(KEYS), "APIS KEYS NOT FOUND, add it in KEYS list of /videofetcher/keys.py file."
         running = False
         params = {
             'q':"india", 

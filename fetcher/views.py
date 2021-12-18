@@ -12,6 +12,10 @@ from .serializers import VideoSerializer
 from videofetcher.pagination import PaginationMixin
 
 class VideoListAPI(APIView, PaginationMixin):
+    """
+    It returns a paginated response of video queryset containing
+    ordered by decreasing publication date(Latest First order).
+    """
     pagination_class = PageNumberPagination
     serializer_class = VideoSerializer
     
@@ -27,6 +31,11 @@ class VideoListAPI(APIView, PaginationMixin):
         return Response(data=serializers.data, status=status.HTTP_200_OK)
 
 class VideoListGenericAPI(generics.ListAPIView):
+    """
+    Implementation of Dashboard API. It can filter out the queryset on basis of 
+    channel name and title. Ordering would be done on basis published on or 
+    created on date.
+    """
     queryset = Video.objects.all().order_by('-published_on')
     serializer_class = VideoSerializer
     filter_backends = [filters.DjangoFilterBackend, OrderingFilter]
@@ -38,6 +47,9 @@ class VideoListGenericAPI(generics.ListAPIView):
     ordering_fields = ['published_on', 'created_on']
 
 class VideoList(ListView):
+    """
+    Youtube Clone home page conatining list of youtube videos.
+    """
     model = Video
     paginate_by = 16
     context_object_name = 'videos' 
