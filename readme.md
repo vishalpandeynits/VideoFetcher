@@ -1,5 +1,5 @@
 # Backend Assignment - Github Externship
-
+** Link: [Video Fetcher](https://videofetcher.herokuapp.com/)
 ## Project Goal
 To make an API to fetch latest videos sorted in reverse chronological order of their publishing date-time from YouTube for a given tag/search query in a paginated response.
 
@@ -33,6 +33,12 @@ pip3 install -r requirements.txt
 python3 manage.py makemigrations
 python3 manage.py migrate
 ```
+
+* Run this command to test if any of your provided API keys are up and running
+```bash
+python3 manage.py test
+```
+
 * Runserver
 ```bash
 python3 manage.py runserver

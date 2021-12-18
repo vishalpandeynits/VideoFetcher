@@ -13,12 +13,8 @@ def update_new_videos():
     video_instances = [
         Video(**video) for video in videos
     ]
-    try:
-        # Bulk create records, skip if received any duplicate video(same video id).
-        created = Video.objects.bulk_create(video_instances, ignore_conflicts = True)
-        if created:
-            print("New list of videos updated into database.")
-            return created
-    except Exception as ex:
-        print("Error occured while inserting data.", ex)
-    return None
+    # Bulk create records, skip if received any duplicate video(same video id).
+    created = Video.objects.bulk_create(video_instances, ignore_conflicts = True)
+    if created:
+        print("New list of videos updated into database.")
+    return bool(created)
