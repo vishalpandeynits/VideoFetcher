@@ -1,6 +1,6 @@
 import requests
 from random import choice
-from decouple import config
+from videofetcher.keys import API_KEYS as KEYS
 
 YOUTUBE_SEARCH_URL = 'https://www.googleapis.com/youtube/v3/search'
 PUBLISHED_AFTER = '2020-01-01T00:00:00.000Z'
@@ -18,9 +18,7 @@ def search_videos(max_results = 20, order = 'date'):
     return:
         returns a json response from youtube data api v3.
     """
-    try:
-        KEYS = config('KEYS').split('|')
-    except Exception as ex:
+    if not len(KEYS):
         print("APIS KEYS NOT FOUND, add it in your environment variables.")
         return None
 

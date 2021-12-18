@@ -1,0 +1,57 @@
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link rel="stylesheet" href="{% static 'style.css' %}" />
+  </head>
+  <body>
+    <div class="videos">
+    <form action = "/">
+        <input type = "text" name = "search" placeholder="search"> 
+        <input type = "submit" value = "filter">
+    </form>
+    <h1>Recommended</h1>
+
+    <div class="videos__container">
+        {% for video in videos %}
+        <div class="video">
+            <div class="video__thumbnail">
+                <img src="{{video.thumbnail_url}}" alt="" />
+            </div>
+            <div class="video__details">
+                <div class="author">
+                <img src="{{video.thumbnail_url}}" alt="" />
+                </div>
+                <div class="title">
+                <h3>{{video.title}}</h3>
+                <a href="">{{video.channel}}</a>
+                </div>
+            </div>
+            </div>
+        {% endfor %}
+    </div>
+    <center>
+        <div class="pagination">
+            <span class="step-links">
+                {% if page_obj.has_previous %}
+                    <a href="?search={{search}}&page=1">&laquo; first</a>
+                    <a href="?search={{search}}&page={{ page_obj.previous_page_number }}">previous</a>
+                {% endif %}
+        
+                <span class="current">
+                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                </span>
+        
+                {% if page_obj.has_next %}
+                    <a href="?search={{search}}&page={{ page_obj.next_page_number }}">next</a>
+                    <a href="?search={{search}}&page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+                {% endif %}
+            </span>
+        </div>
+    </center>
+    </div>
+  </body>
+</html>
