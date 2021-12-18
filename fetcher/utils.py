@@ -6,7 +6,7 @@ YOUTUBE_SEARCH_URL = 'https://www.googleapis.com/youtube/v3/search'
 PUBLISHED_AFTER = '2020-01-01T00:00:00.000Z'
 QUERY_STRINGS = ['india', 'america', 'britain', 'football', 'cricket', 'official', 'what', 'how', 'russia', 'new']
 
-def search_videos(max_results = 20, order = 'date'):
+def search_videos(max_results = 60, order = 'date'):
     """
     Youtube search function
 

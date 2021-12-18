@@ -1,5 +1,7 @@
 # Backend Assignment - Github Externship
-** Link: [Video Fetcher](https://videofetcher.herokuapp.com/)
+* [Video Fetcher](https://videofetcher.herokuapp.com/) <br>
+* [Video Demo](https://www.youtube.com/watch?v=spMKHP5jT7I)
+
 ## Project Goal
 To make an API to fetch latest videos sorted in reverse chronological order of their publishing date-time from YouTube for a given tag/search query in a paginated response.
 
@@ -14,6 +16,12 @@ To make an API to fetch latest videos sorted in reverse chronological order of t
 3. Sqlite3(Database)
 4. Apscheduler
 
+## Superuser Credentials
+```
+url: /admin
+username: root
+password: root
+```
 ## How to run this project ?
 
 * Clone the repository using
