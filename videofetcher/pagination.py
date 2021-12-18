@@ -1,5 +1,3 @@
-# Code taken from : https://stackoverflow.com/questions/45670648/how-to-use-pagination-in-a-non-generic-view-viewset/45670649
-
 class PaginationMixin:
     @property
     def paginator(self):

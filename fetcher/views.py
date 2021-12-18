@@ -16,6 +16,7 @@ class VideoListAPI(APIView, PaginationMixin):
         Return a list of all users.
         """
         videos = Video.objects.all().order_by('-published_on')
+        
         search = request.query_params.get('search')
         if search:
             videos = videos.filter(title__icontains = search)

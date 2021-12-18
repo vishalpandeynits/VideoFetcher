@@ -4,10 +4,9 @@ from decouple import config
 
 YOUTUBE_SEARCH_URL = 'https://www.googleapis.com/youtube/v3/search'
 PUBLISHED_AFTER = '2020-01-01T00:00:00.000Z'
-KEYS = config('KEYS').split('|')
 QUERY_STRINGS = ['india', 'america', 'britain', 'football', 'cricket', 'official', 'what', 'how', 'russia', 'new']
 
-def search_videos(query = 'india', part = 'snippet', max_results = 20, order = 'date'):
+def search_videos(max_results = 20, order = 'date'):
     """
     Youtube search function
 
@@ -19,6 +18,12 @@ def search_videos(query = 'india', part = 'snippet', max_results = 20, order = '
     return:
         returns a json response from youtube data api v3.
     """
+    try:
+        KEYS = config('KEYS').split('|')
+    except Exception as ex:
+        print("APIS KEYS NOT FOUND, add it in your environment variables.")
+        return None
+
     params = {
         'q':choice(QUERY_STRINGS), 
         'maxResults': max_results,
@@ -27,7 +32,8 @@ def search_videos(query = 'india', part = 'snippet', max_results = 20, order = '
         'type': 'video',
         'part': "snippet", 
     }
-    error_json = []
+
+    error_json = [] # records error
     for key in KEYS:
         params.update(**{'key':key,})
         res = requests.get(YOUTUBE_SEARCH_URL, params = params)
@@ -43,6 +49,10 @@ def search_videos(query = 'india', part = 'snippet', max_results = 20, order = '
     return None
 
 def format_data(data):
+    """
+        Accepts the response returned by Youtube API and returns
+        a formatted list of dictionary containing required keys
+    """
     video_list = []
     if data is None:
         return video_list

@@ -1,7 +1,7 @@
 from django.db import models
 
 class Video(models.Model):
-    video_id = models.CharField(max_length = 15)
+    video_id = models.CharField(max_length = 15, unique = True)
     title = models.CharField(max_length = 100)
     description = models.CharField(max_length = 5000, null = True, blank = True)
     channel = models.CharField(max_length = 100)
