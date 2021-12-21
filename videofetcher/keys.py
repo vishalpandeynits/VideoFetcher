@@ -1,3 +1,6 @@
+# list of all API keys, that would be 
+# used to retrieve data of youtube videos.
+
 API_KEYS = [
     "AIzaSyAAzTTInfdBkxj4vNuPqJQaxmrwZJOGFWw",
     "AIzaSyA1IIjlsvOMLIo489WfsXFBQtmQG8_Z8Ak",
