@@ -8,13 +8,14 @@
 
 body {
   font-family: 'Roboto', sans-serif;
+  padding-bottom: 30px;margin-bottom: 30px;;
 }
 .videos {
   width: 100%;
   height: 100%;
   padding: 15px 15px;
   border-top: 1px solid #ddd;
-  overflow-y: scroll;
+  /* overflow-y: scroll; */
 }
 
 .videos__container {
@@ -106,4 +107,30 @@ h1 {
 
 .navigation li a:hover {
   background-color: #111;
+}
+
+.search{
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;;
+}
+.search input[type="text"]{
+  width:500px;
+  padding:10px;
+  height:40px;
+}
+.search input[type="submit"]{
+  width:80px;
+  padding:10px;
+  height:40px;
+  color:black;
+  background:rgb(100, 94, 94);
+  border:none;
+  border-radius :2px;
+}
+.search input[type="submit"]:hover{
+  cursor: pointer;
+  background-color: black;
+  color:white;
+  transition: all 1s;
 }
