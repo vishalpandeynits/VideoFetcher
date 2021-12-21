@@ -1,6 +1,7 @@
 import requests
 from random import choice
 from videofetcher.keys import API_KEYS as KEYS
+from .models import Video
 
 YOUTUBE_SEARCH_URL = 'https://www.googleapis.com/youtube/v3/search'
 PUBLISHED_AFTER = '2020-01-01T00:00:00.000Z'
@@ -18,8 +19,8 @@ def search_videos(max_results = 60, order = 'date'):
     return:
         returns a json response from youtube data api v3.
     """
-    if not len(KEYS):
-        print("APIS KEYS NOT FOUND, add it in your environment variables.")
+    if not KEYS:
+        print("APIS KEYS NOT FOUND, add API keys into API_KEYS list of /fetcher/keys.py file.")
         return None
 
     params = {
@@ -33,7 +34,7 @@ def search_videos(max_results = 60, order = 'date'):
 
     error_json = [] # records error
     for key in KEYS:
-        params.update(**{'key':key,})
+        params.update(**{'key':key}) # add keys into params
         res = requests.get(YOUTUBE_SEARCH_URL, params = params)
         if res.status_code == 200:
             data = res.json()
@@ -42,7 +43,7 @@ def search_videos(max_results = 60, order = 'date'):
             error_json.append(res.json())
 
     if error_json:
-        print(error_json)
+        print(error_json) # list out all errors
         
     return None
 
@@ -54,6 +55,7 @@ def format_data(data):
     video_list = []
     if data is None:
         return video_list
+        
     items = data.get('items')
     for item in items:
         video = {
@@ -66,3 +68,21 @@ def format_data(data):
         }
         video_list.append(video)
     return video_list
+
+def update_new_videos():
+    """
+    Accepts data from search function, formats the required data,
+    and bulk create into database.
+    """
+    data = search_videos()
+    videos = format_data(data)
+    
+    # create a list of Video instances
+    video_instances = [
+        Video(**video) for video in videos
+    ]
+    # Bulk create records, skip if received any duplicate video(same video id).
+    created = Video.objects.bulk_create(video_instances, ignore_conflicts = True)
+    if created:
+        print("New list of videos updated into database.")
+    return bool(created)
