@@ -42,7 +42,7 @@ python3 manage.py makemigrations
 python3 manage.py migrate
 ```
 
-* Run this command to test if any of your provided API keys are up and running
+* Run this command to test if any of your provided API keys are up and running(make sure your API Keys are enabled).
 ```bash
 python3 manage.py test
 ```
